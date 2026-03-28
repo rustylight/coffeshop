@@ -1,0 +1,87 @@
+<Window x:Class="CoffeeShop.Views.Barista.BaristaShell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CoffeeShop — Бариста" Width="1280" Height="800"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource BgBeige}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#2C1810">
+            <DockPanel>
+                <!-- Bottom: user info + logout -->
+                <StackPanel DockPanel.Dock="Bottom" Margin="16,0,16,20">
+                    <Separator Background="#3D2B1F" Margin="0,0,0,12" />
+                    <TextBlock x:Name="ShiftInfo" Text=""
+                               Foreground="#8B7355" FontSize="11" Margin="0,0,0,12"
+                               TextWrapping="Wrap" />
+                    <DockPanel>
+                        <Border Width="36" Height="36" CornerRadius="18" Background="#C8956C"
+                                DockPanel.Dock="Left" Margin="0,0,10,0">
+                            <TextBlock x:Name="AvatarInitials" Text="МК" FontWeight="Bold"
+                                       Foreground="White" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" FontSize="13" />
+                        </Border>
+                        <Button Click="LogoutClick" Cursor="Hand" DockPanel.Dock="Right"
+                                VerticalAlignment="Center" Margin="6,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Bd" Width="28" Height="28" CornerRadius="6"
+                                            Background="#3D2B1F">
+                                        <TextBlock Text="⏻" FontSize="11" Foreground="#8B7355"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#4D3B2F" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="UserName" Text="" Foreground="White"
+                                       FontSize="12" FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock x:Name="UserPhone" Text="" Foreground="#8B7355" FontSize="10" />
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+
+                <!-- Top section -->
+                <StackPanel Margin="16,24,16,0">
+                    <!-- Logo -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <Rectangle Width="32" Height="32" RadiusX="6" RadiusY="6"
+                                   Margin="0,0,10,0">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Assets/logo.png" Stretch="UniformToFill" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="CoffeeShop" FontFamily="Playfair Display" FontSize="18"
+                                   FontWeight="Bold" Foreground="White" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <!-- Role badge - centered -->
+                    <Border Background="#C8956C" CornerRadius="10" Padding="10,3"
+                            HorizontalAlignment="Center" Margin="0,0,0,24">
+                        <TextBlock Text="Бариста" FontSize="10" Foreground="White" FontWeight="SemiBold" />
+                    </Border>
+
+                    <!-- Nav -->
+                    <Button x:Name="BtnActive" Content="  📋  Активные заказы" Click="NavActive"
+                            Style="{StaticResource SidebarActiveButton}" Margin="0,0,0,4" />
+                    <Button x:Name="BtnCompleted" Content="  ✅  Выполненные" Click="NavCompleted"
+                            Style="{StaticResource SidebarButton}" Margin="0,0,0,4" />
+                    <Button x:Name="BtnEarnings" Content="  💰  Мой заработок" Click="NavEarnings"
+                            Style="{StaticResource SidebarButton}" Margin="0,0,0,4" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Frame x:Name="ContentFrame" Grid.Column="1" NavigationUIVisibility="Hidden" />
+    </Grid>
+</Window>

@@ -1,0 +1,76 @@
+<Window x:Class="CoffeeShop.Views.Dialogs.ConfirmDeleteDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Удалить сотрудника" Width="500" Height="360"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+    <Grid Margin="20">
+        <Border CornerRadius="20" Background="White">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.2" Color="#2C1810" />
+            </Border.Effect>
+        </Border>
+        <Border CornerRadius="20" Background="White">
+        <StackPanel HorizontalAlignment="Center" Margin="32">
+            <!-- Avatar -->
+            <Border Width="64" Height="64" CornerRadius="32" Background="#A8D5BA"
+                    HorizontalAlignment="Center" Margin="0,0,0,20">
+                <TextBlock x:Name="AvatarText" Text="О.И." FontSize="22" FontWeight="Bold"
+                           Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+
+            <!-- Title -->
+            <TextBlock Text="Удалить сотрудника?" FontFamily="Playfair Display"
+                       FontSize="20" FontWeight="Bold" Foreground="#2C1810"
+                       HorizontalAlignment="Center" Margin="0,0,0,12" />
+
+            <!-- Description -->
+            <TextBlock x:Name="DescText" TextAlignment="Center" FontSize="14"
+                       Foreground="#9B7464" LineHeight="22" Margin="0,0,0,24" HorizontalAlignment="Center" />
+
+            <!-- Buttons -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Click="CancelClick" Cursor="Hand" Height="44">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Height="44" CornerRadius="10" Background="#F5F0E8">
+                                <TextBlock Text="Отмена" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="#6F4E37"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#E8E0D4" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="2" Click="ConfirmClick" Cursor="Hand" Height="44">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Height="44" CornerRadius="10" Background="#DC2626">
+                                <TextBlock Text="Удалить" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#B91C1C" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </StackPanel>
+        </Border>
+    </Grid>
+</Window>

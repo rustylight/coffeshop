@@ -1,0 +1,113 @@
+<Page x:Class="CoffeeShop.Views.Client.ClientProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Профиль" Background="{StaticResource BgBeige}">
+    <DockPanel Margin="32,24">
+        <TextBlock Text="Мой профиль" FontFamily="Playfair Display"
+                   FontSize="28" FontWeight="Bold" Foreground="#2C1810"
+                   DockPanel.Dock="Top" Margin="0,0,0,24" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: Profile card -->
+            <Border Grid.Column="0" Background="White" CornerRadius="12" Padding="32"
+                    Margin="0,0,20,0" VerticalAlignment="Top">
+                <StackPanel>
+                    <!-- Avatar -->
+                    <Border Width="80" Height="80" CornerRadius="40" Background="#C8956C"
+                            HorizontalAlignment="Center" Margin="0,0,0,16">
+                        <TextBlock x:Name="AvatarText" Text="А.К." FontSize="28" FontWeight="Bold"
+                                   Foreground="White" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock x:Name="NameText" FontSize="20" FontWeight="Bold" Foreground="#2C1810"
+                               HorizontalAlignment="Center" Margin="0,0,0,4" />
+                    <TextBlock x:Name="PhoneText" FontSize="13" Foreground="#8B7355"
+                               HorizontalAlignment="Center" Margin="0,0,0,24" />
+
+                    <Separator Margin="0,0,0,20" />
+
+                    <!-- Info rows -->
+                    <DockPanel Margin="0,0,0,16">
+                        <TextBlock Text="Email" FontSize="13" Foreground="#8B7355" />
+                        <TextBlock x:Name="EmailText" Text="—" FontSize="13" Foreground="#2C1810"
+                                   FontWeight="SemiBold" HorizontalAlignment="Right" />
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,24">
+                        <TextBlock Text="Дата регистрации" FontSize="13" Foreground="#8B7355" />
+                        <TextBlock x:Name="RegDateText" FontSize="13" Foreground="#2C1810"
+                                   FontWeight="SemiBold" HorizontalAlignment="Right" />
+                    </DockPanel>
+
+                    <Button Content="Редактировать профиль" Cursor="Hand" HorizontalAlignment="Stretch"
+                            Click="EditProfileClick" Height="40">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bd" Height="40" CornerRadius="8"
+                                        BorderBrush="#D1C7B7" BorderThickness="1" Background="White">
+                                    <TextBlock Text="Редактировать профиль" FontSize="13"
+                                               Foreground="#2C1810" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bd" Property="Background" Value="#F5F0E8" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+            <!-- Right: Bonus card -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                <Border Background="White" CornerRadius="12" Padding="24" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="⭐" FontSize="28" Margin="0,0,0,12" />
+                        <TextBlock x:Name="BonusText" Text="0 бонусов" FontSize="26" FontWeight="Bold"
+                                   Foreground="#2C1810" Margin="0,0,0,4" />
+                        <TextBlock Text="Ваш текущий баланс" FontSize="12"
+                                   Foreground="#8B7355" Margin="0,0,0,16" />
+
+                        <Separator Margin="0,0,0,12" />
+
+                        <DockPanel Margin="0,0,0,6">
+                            <TextBlock Text="Возврат" FontSize="12" Foreground="#8B7355" />
+                            <TextBlock Text="Серебряный" FontSize="12" Foreground="#C8956C"
+                                       FontWeight="SemiBold" HorizontalAlignment="Right" />
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock Text="До золотого" FontSize="12" Foreground="#8B7355" />
+                            <TextBlock x:Name="ToGoldText" Text="35 бонусов" FontSize="12"
+                                       Foreground="#2C1810" FontWeight="SemiBold"
+                                       HorizontalAlignment="Right" />
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+
+                <Button Click="LogoutClick" Cursor="Hand" Height="40">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Height="40" CornerRadius="8"
+                                    Background="White">
+                                <TextBlock Text="Выйти из аккаунта" FontSize="13"
+                                           Foreground="#DC2626" FontWeight="SemiBold"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#FEE2E2" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Page>

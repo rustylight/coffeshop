@@ -1,0 +1,149 @@
+<Page x:Class="CoffeeShop.Views.Client.OrderStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Статус заказа" Background="{StaticResource BgBeige}">
+    <Grid Margin="32,24">
+        <!-- No active order -->
+        <StackPanel x:Name="NoOrderPanel" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Visibility="Collapsed">
+            <Border Width="80" Height="80" CornerRadius="40" Background="#F5F0E8"
+                    HorizontalAlignment="Center" Margin="0,0,0,16">
+                <TextBlock Text="☕" FontSize="36" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Border>
+            <TextBlock Text="Нет активного заказа" FontSize="22" FontWeight="Bold"
+                       Foreground="#2C1810" HorizontalAlignment="Center" />
+            <TextBlock Text="Перейдите в меню, чтобы оформить заказ" FontSize="14"
+                       Foreground="#8B7355" HorizontalAlignment="Center" Margin="0,8,0,20" />
+            <Button Content="Перейти в меню" Style="{StaticResource CoffeeButton}"
+                    Click="GoToMenuClick" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Order exists -->
+        <StackPanel x:Name="OrderPanel" Visibility="Visible" MaxWidth="700"
+                    HorizontalAlignment="Center">
+            <!-- Title section -->
+            <TextBlock x:Name="OrderSubtitle" Text="Заказ A2047" FontSize="13"
+                       Foreground="#8B7355" HorizontalAlignment="Center" Margin="0,16,0,4" />
+            <TextBlock Text="Статус вашего заказа" FontFamily="Playfair Display"
+                       FontSize="30" FontWeight="Bold" FontStyle="Italic"
+                       Foreground="#2C1810" HorizontalAlignment="Center" Margin="0,0,0,6" />
+            <TextBlock x:Name="TimeEstimate" Text="Ориентировочное время готовности: 6 минут"
+                       FontSize="12" Foreground="#8B7355" HorizontalAlignment="Center"
+                       Margin="0,0,0,28" />
+
+            <!-- Status steps with connecting lines -->
+            <Border Background="White" CornerRadius="16" Padding="32,24" Margin="0,0,0,24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                        <Border x:Name="Step1" Width="48" Height="48" CornerRadius="24"
+                                Background="#E5E7EB" HorizontalAlignment="Center">
+                            <TextBlock x:Name="Step1Text" Text="✓" FontSize="18" FontWeight="Bold"
+                                       Foreground="White" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <TextBlock Text="Принят" FontSize="12" HorizontalAlignment="Center"
+                                   Margin="0,8,0,0" Foreground="#6B7280" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                        <Border x:Name="Step2" Width="48" Height="48" CornerRadius="24"
+                                Background="#E5E7EB" HorizontalAlignment="Center">
+                            <TextBlock x:Name="Step2Text" Text="2" FontSize="18" FontWeight="Bold"
+                                       Foreground="White" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <TextBlock Text="В процессе" FontSize="12" HorizontalAlignment="Center"
+                                   Margin="0,8,0,0" Foreground="#6B7280" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                        <Border x:Name="Step3" Width="48" Height="48" CornerRadius="24"
+                                Background="#E5E7EB" HorizontalAlignment="Center">
+                            <TextBlock x:Name="Step3Text" Text="3" FontSize="18" FontWeight="Bold"
+                                       Foreground="White" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <TextBlock Text="Готов" FontSize="12" HorizontalAlignment="Center"
+                                   Margin="0,8,0,0" Foreground="#6B7280" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                        <Border x:Name="Step4" Width="48" Height="48" CornerRadius="24"
+                                Background="#E5E7EB" HorizontalAlignment="Center">
+                            <TextBlock x:Name="Step4Text" Text="4" FontSize="18" FontWeight="Bold"
+                                       Foreground="White" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <TextBlock Text="Получен" FontSize="12" HorizontalAlignment="Center"
+                                   Margin="0,8,0,0" Foreground="#6B7280" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Order items -->
+            <Border Background="White" CornerRadius="12" Padding="24,20" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="Состав заказа" FontSize="15" FontWeight="SemiBold"
+                               Foreground="#2C1810" Margin="0,0,0,12" />
+                    <ItemsControl x:Name="ItemsList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel Margin="0,0,0,8">
+                                    <TextBlock DockPanel.Dock="Right" FontSize="14" Foreground="#2C1810"
+                                               FontWeight="SemiBold">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0:N0} ₽">
+                                                <Binding Path="Subtotal" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Foreground="#2C1810">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} × {1}">
+                                                <Binding Path="MenuItem.Name" />
+                                                <Binding Path="Quantity" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Separator Margin="0,8" />
+                    <DockPanel>
+                        <TextBlock Text="Итого" FontSize="16" FontWeight="Bold" Foreground="#2C1810" />
+                        <TextBlock x:Name="TotalText" FontSize="16" FontWeight="Bold"
+                                   Foreground="#2C1810" HorizontalAlignment="Right" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Back to menu button -->
+            <Button Click="GoToMenuClick" Cursor="Hand" HorizontalAlignment="Center" Height="44">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Height="44" CornerRadius="22" Padding="28,0"
+                                Background="#2C1810">
+                            <TextBlock Text="← Вернуться к меню" FontSize="14"
+                                       FontWeight="SemiBold" Foreground="White"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#3D2B1F" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,71 @@
+<Page x:Class="CoffeeShop.Views.Barista.BaristaCompletedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Выполненные заказы" Background="{StaticResource BgBeige}">
+    <DockPanel Margin="32,24">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,20">
+            <TextBlock Text="Выполненные заказы" FontFamily="Playfair Display"
+                       FontSize="28" FontWeight="Bold" Foreground="#2C1810" />
+            <TextBlock x:Name="TodayCountText" Text="Сегодня: 0 заказов"
+                       FontSize="12" Foreground="#8B7355" HorizontalAlignment="Right"
+                       VerticalAlignment="Center" />
+        </DockPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="OrdersList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="12" Padding="20" Margin="0,0,0,10">
+                            <DockPanel>
+                                <!-- Price -->
+                                <TextBlock DockPanel.Dock="Right" FontSize="15" FontWeight="Bold"
+                                           Foreground="#2C1810" VerticalAlignment="Top" Margin="16,0,0,0">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0:N0} ₽">
+                                            <Binding Path="FinalAmount" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+
+                                <StackPanel>
+                                    <DockPanel Margin="0,0,0,4">
+                                        <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="#2C1810">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Заказ #{0}">
+                                                    <Binding Path="Id" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,0,0">
+                                            <Border CornerRadius="10" Padding="8,2" Background="#D1FAE5">
+                                                <TextBlock Text="Получен" FontSize="11"
+                                                           Foreground="#065F46" FontWeight="SemiBold" />
+                                            </Border>
+                                            <TextBlock FontSize="11" Foreground="#8B7355"
+                                                       VerticalAlignment="Center" Margin="8,0,0,0">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="× {0}">
+                                                        <Binding Path="CreatedAt" StringFormat="HH:mm" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <TextBlock Text="{Binding ItemsSummary}" FontSize="12"
+                                               Foreground="#8B7355" Margin="0,0,0,2" />
+                                    <TextBlock FontSize="12" Foreground="#8B7355">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Клиент: {0}">
+                                                <Binding Path="Client.FullName" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Page>

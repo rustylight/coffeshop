@@ -1,0 +1,107 @@
+<Window x:Class="CoffeeShop.Views.Dialogs.CloseShiftDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Закрыть смену" Width="560" Height="440"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+    <Grid Margin="20">
+        <Border CornerRadius="20" Background="White">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.2" Color="#2C1810" />
+            </Border.Effect>
+        </Border>
+        <Border CornerRadius="20" Background="White">
+        <StackPanel Margin="32">
+            <!-- Header -->
+            <DockPanel Margin="0,0,0,16">
+                <TextBlock Text="Закрыть смену" FontFamily="Playfair Display"
+                           FontSize="20" FontWeight="Bold" Foreground="#2C1810" />
+                <Button Click="CancelClick" DockPanel.Dock="Right" Cursor="Hand"
+                        HorizontalAlignment="Right">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="32" Height="32" CornerRadius="16" Background="#F5F0E8">
+                                <TextBlock Text="✕" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="#6F4E37"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </DockPanel>
+
+            <!-- Divider -->
+            <Border Height="1" Background="#F0EBE3" Margin="0,0,0,20" />
+
+            <!-- Summary card -->
+            <Border Background="#F9F7F5" CornerRadius="12" Padding="16" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Text="Итоги смены" FontSize="13" FontWeight="Bold"
+                               Foreground="#6F4E37" Margin="0,0,0,12" />
+
+                    <DockPanel Margin="0,0,0,10">
+                        <TextBlock Text="Выручка" FontSize="13" Foreground="#9B7464" />
+                        <TextBlock x:Name="RevenueText" Text="0 ₽" FontSize="14" FontWeight="Bold"
+                                   Foreground="#2C1810" HorizontalAlignment="Right" />
+                    </DockPanel>
+
+                    <DockPanel Margin="0,0,0,10">
+                        <TextBlock Text="Заказов выполнено" FontSize="13" Foreground="#9B7464" />
+                        <TextBlock x:Name="OrdersText" Text="0" FontSize="14" FontWeight="Bold"
+                                   Foreground="#2C1810" HorizontalAlignment="Right" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock Text="Начислено бонусов" FontSize="13" Foreground="#9B7464" />
+                        <TextBlock x:Name="BonusText" Text="0" FontSize="14" FontWeight="Bold"
+                                   Foreground="#2C1810" HorizontalAlignment="Right" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Buttons -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Click="CancelClick" Cursor="Hand" Height="44">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Height="44" CornerRadius="10" Background="#F5F0E8">
+                                <TextBlock Text="Отмена" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="#6F4E37"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#E8E0D4" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="2" Click="ConfirmClick" Cursor="Hand" Height="44">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Height="44" CornerRadius="10" Background="#2C1810">
+                                <TextBlock Text="Закрыть смену" FontSize="14" FontWeight="SemiBold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#1A0F0A" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </StackPanel>
+        </Border>
+    </Grid>
+</Window>

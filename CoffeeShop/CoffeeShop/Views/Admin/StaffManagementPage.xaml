@@ -1,0 +1,134 @@
+<Page x:Class="CoffeeShop.Views.Admin.StaffManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Управление персоналом" Background="{StaticResource BgBeige}">
+    <DockPanel Margin="32,24">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,24">
+            <TextBlock Text="Управление персоналом" FontFamily="Playfair Display"
+                       FontSize="28" FontWeight="Bold" Foreground="#2C1810" />
+            <Button Click="AddBaristaClick" HorizontalAlignment="Right" Cursor="Hand" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" CornerRadius="8" Background="#C8956C"
+                                Padding="16,0" Height="40">
+                            <TextBlock Text="+ Добавить бариста" FontSize="13"
+                                       Foreground="White" FontWeight="SemiBold"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#B07D5A" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </DockPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="StaffList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" ItemWidth="400" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="12" Padding="20" Margin="0,0,12,12">
+                            <StackPanel>
+                                <!-- Top: Avatar + name -->
+                                <DockPanel Margin="0,0,0,12">
+                                    <Border Width="48" Height="48" CornerRadius="24"
+                                            Background="#C8956C" DockPanel.Dock="Left"
+                                            Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding Initials}" FontWeight="Bold"
+                                                   Foreground="White" FontSize="16"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" />
+                                    </Border>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding FullName}" FontSize="15"
+                                                   FontWeight="SemiBold" Foreground="#2C1810" />
+                                        <Border CornerRadius="10" Padding="8,2"
+                                                Background="#FEF3C7" HorizontalAlignment="Left"
+                                                Margin="0,4,0,0">
+                                            <TextBlock Text="Бариста" FontSize="10"
+                                                       Foreground="#92400E" FontWeight="SemiBold" />
+                                        </Border>
+                                    </StackPanel>
+                                </DockPanel>
+
+                                <!-- Stats -->
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="{Binding OrdersCount}" FontSize="18"
+                                                   FontWeight="Bold" Foreground="#2C1810" />
+                                        <TextBlock Text="Заказов" FontSize="11" Foreground="#8B7355" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding EarningsText}" FontSize="18"
+                                                   FontWeight="Bold" Foreground="#2C1810" />
+                                        <TextBlock Text="Начислено" FontSize="11" Foreground="#8B7355" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Separator Margin="0,0,0,12" />
+
+                                <!-- Actions -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" Click="EditClick" Tag="{Binding}"
+                                            Cursor="Hand" Height="36">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="Bd" Height="36" CornerRadius="8"
+                                                        BorderBrush="#D1C7B7" BorderThickness="1"
+                                                        Background="White">
+                                                    <TextBlock Text="Редактировать" FontSize="12"
+                                                               Foreground="#2C1810"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Bd" Property="Background" Value="#F5F0E8" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Button Grid.Column="1" Click="DeactivateClick" Tag="{Binding}"
+                                            Cursor="Hand" Margin="8,0,0,0" Height="36" Width="36">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="Bd" Background="#FEE2E2" CornerRadius="8"
+                                                        Width="36" Height="36">
+                                                    <TextBlock Text="✕" FontSize="14" Foreground="#DC2626"
+                                                               FontWeight="Bold"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Bd" Property="Background" Value="#FECACA" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Page>
